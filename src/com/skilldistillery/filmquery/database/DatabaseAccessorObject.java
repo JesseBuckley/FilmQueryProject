@@ -42,11 +42,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					film = new Film();
 					film.setId(filmR.getInt("id"));
 					film.setTitle(filmR.getString("title"));
-					film.setDescription(filmR.getString("description"));
 					film.setReleaseYear(filmR.getInt("release_year"));
-					film.setLanguageId(filmR.getInt("language_id"));
-					film.setLength(filmR.getInt("length"));
 					film.setRating(filmR.getString("rating"));
+					film.setDescription(filmR.getString("description"));
 
 					actorStmt.setInt(1, filmId);
 					List<Actor> actors = new ArrayList<>();
@@ -125,9 +123,39 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	}
 
 	@Override
-	public Film findFilmByKeyword(String word) {
+	public List<Film> findFilmByKeyword(String word) {
+		List<Film> films = new ArrayList<>();
 		
-		return null;
+		String sql = "SELECT * FROM film WHERE title LIKE ? OR description LIKE ?";
+		
+		try (Connection conn = DriverManager.getConnection(URL, user, pass);
+				PreparedStatement stmt = conn.prepareStatement(sql);) {
+			 
+			String search = "%" + word + "%";
+			stmt.setString(1, search);
+			stmt.setString(2, search);
+			
+			try (ResultSet rs = stmt.executeQuery()) {
+				while(rs.next()) {
+					Film film = createFilmFromResultSet(rs);
+					
+					films.add(film);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return films;
+	}
+
+	private Film createFilmFromResultSet(ResultSet rs) throws SQLException {
+		int id = rs.getInt("id");
+		String title = rs.getString("title");
+		int year = rs.getInt("release_year");
+		String rating = rs.getString("rating");
+		String description = rs.getString("description");
+		return new Film(id, title, year, rating, description);
 	}
 
 }

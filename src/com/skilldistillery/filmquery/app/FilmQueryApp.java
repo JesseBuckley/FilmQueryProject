@@ -58,7 +58,7 @@ public class FilmQueryApp {
 		while (!input.hasNextInt()) {
 			input.nextLine();
 			
-			System.out.println("invalid");
+			System.out.println("Invalid entry, try again (1-3)");
 		}
 		int choice = input.nextInt();
 		input.nextLine();
@@ -74,7 +74,7 @@ public class FilmQueryApp {
 		while (!input.hasNextLine()) {
 			input.nextLine();
 			
-			System.out.println("invalid");
+			System.out.println("Invalid entry, try again (1-3)");
 		}
 		int filmId = input.nextInt();
 		input.nextLine();
@@ -100,7 +100,6 @@ public class FilmQueryApp {
 
 	private void lookupFilmByKeyword() {
 		Scanner input = new Scanner(System.in);
-		input.nextLine();
 		System.out.println("Enter the search keyword: ");
 		String keyword = input.nextLine();
 		List<Film> films = db.findFilmByKeyword(keyword);

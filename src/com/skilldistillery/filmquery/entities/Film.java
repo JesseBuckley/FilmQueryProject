@@ -29,6 +29,15 @@ public class Film {
 		this.actors = actors;
 	}
 
+	public Film(int id, String title, int releaseYear, String rating, String description) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.releaseYear = releaseYear;
+		this.rating = rating;
+		this.description = description;
+	}
+
 	public int getId() {
 		return id;
 	}
