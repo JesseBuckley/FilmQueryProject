@@ -1,5 +1,5 @@
 # FilmQueryProject
-This project takes information about films and actors from a database and using SQL select statements we can grab that information and use it to make a choice based application.
+This project takes information about films and actors from a database using the terminal and SQL with select statements throughout the code we can grab that information and use it to make a choice based application which lets us display films based on IDs, or Keywords.
 
 # Description
 When you run the FilmQueryApp you will be prompted with a menu like the following:
