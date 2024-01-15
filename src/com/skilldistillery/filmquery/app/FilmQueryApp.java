@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.skilldistillery.filmquery.database.DatabaseAccessor;
 import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
+import com.skilldistillery.filmquery.entities.Actor;
 import com.skilldistillery.filmquery.entities.Film;
 
 public class FilmQueryApp {
@@ -95,7 +96,19 @@ public class FilmQueryApp {
 		System.out.println("Year: " + film.getReleaseYear());
 		System.out.println("Rating: " + film.getRating());
 		System.out.println("Description: " + film.getDescription());
-
+		System.out.println("Language: " + film.getLanguage());
+		
+		List<Actor> actors = db.findActorsByFilmId(film.getId());
+		if (!actors.isEmpty()) {
+			System.out.println("Actors in the Cast:");
+			for (Actor actor : actors) {
+				System.out.println("  -" + actor.getFirstName() + " " + actor.getLastName());
+				
+			}
+		} else {
+			System.out.println("No actor found for this film.");
+		}
+		System.out.println("=======================");
 	}
 
 	private void lookupFilmByKeyword() {

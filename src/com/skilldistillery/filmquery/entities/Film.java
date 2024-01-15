@@ -8,13 +8,26 @@ public class Film {
 	private String title;
 	private String description;
 	private int releaseYear;
-	private int languageId;
+	private String language;
 	private int length;
 	private String rating;
 
 	private List<Actor> actors;
 
 	public Film() {}
+
+	public Film(int id, String title, String description, int releaseYear, String language, int length, String rating,
+			List<Actor> actors) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.releaseYear = releaseYear;
+		this.language = language;
+		this.length = length;
+		this.rating = rating;
+		this.actors = actors;
+	}
 
 	public Film(int id, String title, String description, int releaseYear, int languageId, int length, String rating,
 			List<Actor> actors) {
@@ -23,7 +36,7 @@ public class Film {
 		this.title = title;
 		this.description = description;
 		this.releaseYear = releaseYear;
-		this.languageId = languageId;
+		this.language = language;
 		this.length = length;
 		this.rating = rating;
 		this.actors = actors;
@@ -70,14 +83,6 @@ public class Film {
 		this.releaseYear = releaseYear;
 	}
 
-	public int getLanguageId() {
-		return languageId;
-	}
-
-	public void setLanguageId(int languageId) {
-		this.languageId = languageId;
-	}
-
 	public double getLength() {
 		return length;
 	}
@@ -104,7 +109,7 @@ public class Film {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(actors, description, id, languageId, length, rating, releaseYear, title);
+		return Objects.hash(actors, description, id, language, length, rating, releaseYear, title);
 	}
 
 	@Override
@@ -117,8 +122,7 @@ public class Film {
 			return false;
 		Film other = (Film) obj;
 		return Objects.equals(actors, other.actors) && Objects.equals(description, other.description) && id == other.id
-				&& languageId == other.languageId
-				&& Double.doubleToLongBits(length) == Double.doubleToLongBits(other.length)
+				&& Objects.equals(language, other.language) && length == other.length
 				&& Objects.equals(rating, other.rating) && releaseYear == other.releaseYear
 				&& Objects.equals(title, other.title);
 	}
@@ -126,7 +130,16 @@ public class Film {
 	@Override
 	public String toString() {
 		return "Film id = " + id + ", title = " + title + ", description = " + description + ", release year = " + releaseYear
-				+ ", languageId = " + languageId + ", length = " + length + " minutes, rating = " + rating 
+				+ ", languageId = " + language + ", length = " + length + " minutes, rating = " + rating 
 				+ "\n Actors = " + actors;
+	}
+
+	public String getLanguage() {
+
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 }
