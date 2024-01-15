@@ -6,17 +6,26 @@ When you run the FilmQueryApp you will be prompted with a menu like the followin
 
 Please choose between the options below;
 
-1 Look up a film by its id 
-2 Look up a film by a search keyword
-3 Exit the application
+(1) Look up a film by its id.
 
-Once you make a choice the program will pronpt you based on that choice.
+(2) Look up a film by a search keyword.
+
+(3) Exit the application.
+
+Once you make a choice the program will pronpt you based on that choice to either enter an ID or to enter a keyword. 
+
+You also have to option to exit at any time in the main menu. The program will not terminate until you decided to exit (3).
 
 
 # Tech Used
 -Eclipse
+
+-SDVID database
+
 -GitHub
+
 -Sublime
+
 -SD Materials
 
 # Lessons Learned
