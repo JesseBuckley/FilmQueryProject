@@ -29,19 +29,6 @@ public class Film {
 		this.actors = actors;
 	}
 
-	public Film(int id, String title, String description, int releaseYear, int languageId, int length, String rating,
-			List<Actor> actors) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.description = description;
-		this.releaseYear = releaseYear;
-		this.language = language;
-		this.length = length;
-		this.rating = rating;
-		this.actors = actors;
-	}
-
 	public Film(int id, String title, int releaseYear, String rating, String description) {
 		super();
 		this.id = id;

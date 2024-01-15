@@ -45,7 +45,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					film.setReleaseYear(filmR.getInt("release_year"));
 					film.setRating(filmR.getString("rating"));
 					film.setDescription(filmR.getString("description"));
-
+					film.setLanguage(filmR.getString("language"));
+					
 					actorStmt.setInt(1, filmId);
 					List<Actor> actors = new ArrayList<>();
 
