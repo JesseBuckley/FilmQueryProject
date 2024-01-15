@@ -32,8 +32,8 @@ public class FilmQueryApp {
 
 		while (choice != 3) {
 			printMenu();
-			 choice = getUserChoice();
-			
+			choice = getUserChoice();
+
 			switch (choice) {
 			case 1:
 				lookupFilmById();
@@ -54,34 +54,33 @@ public class FilmQueryApp {
 
 	private int getUserChoice() {
 		Scanner input = new Scanner(System.in);
-		
+
 		System.out.println("Enter your choice (1-3):");
 		while (!input.hasNextInt()) {
 			input.nextLine();
-			
+
 			System.out.println("Invalid entry, try again (1-3)");
 		}
 		int choice = input.nextInt();
 		input.nextLine();
 		return choice;
-}
+	}
 
 	private void lookupFilmById() {
 		Scanner input = new Scanner(System.in);
 
 		System.out.println("Enter the film ID: ");
-		
-		
+
 		while (!input.hasNextLine()) {
 			input.nextLine();
-			
+
 			System.out.println("Invalid entry, try again (1-3)");
 		}
 		int filmId = input.nextInt();
 		input.nextLine();
 
 		Film film = db.findFilmById(filmId);
-				
+
 		if (film != null) {
 			displayFilmDetails(film);
 		} else {
@@ -96,7 +95,7 @@ public class FilmQueryApp {
 		System.out.println("Year: " + film.getReleaseYear());
 		System.out.println("Rating: " + film.getRating());
 		System.out.println("Description: " + film.getDescription());
-		System.out.println("Language: " + film.getLanguage());
+		System.out.println("Language: " + db.getLanguageStringById(film.getLanguageId()));
 		
 		List<Actor> actors = db.findActorsByFilmId(film.getId());
 		if (!actors.isEmpty()) {
@@ -113,6 +112,7 @@ public class FilmQueryApp {
 
 	private void lookupFilmByKeyword() {
 		Scanner input = new Scanner(System.in);
+		
 		System.out.println("Enter the search keyword: ");
 		String keyword = input.nextLine();
 		List<Film> films = db.findFilmByKeyword(keyword);

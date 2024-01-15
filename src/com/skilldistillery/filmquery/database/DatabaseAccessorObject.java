@@ -45,8 +45,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					film.setReleaseYear(filmR.getInt("release_year"));
 					film.setRating(filmR.getString("rating"));
 					film.setDescription(filmR.getString("description"));
-					film.setLanguage(filmR.getString("language"));
-					
+					film.setLanguageId(filmR.getInt("language_id"));
+
 					actorStmt.setInt(1, filmId);
 					List<Actor> actors = new ArrayList<>();
 
@@ -126,20 +126,20 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	@Override
 	public List<Film> findFilmByKeyword(String word) {
 		List<Film> films = new ArrayList<>();
-		
+
 		String sql = "SELECT * FROM film WHERE title LIKE ? OR description LIKE ?";
-		
+
 		try (Connection conn = DriverManager.getConnection(URL, user, pass);
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
-			 
+
 			String search = "%" + word + "%";
 			stmt.setString(1, search);
 			stmt.setString(2, search);
-			
+
 			try (ResultSet rs = stmt.executeQuery()) {
-				while(rs.next()) {
+				while (rs.next()) {
 					Film film = createFilmFromResultSet(rs);
-					
+
 					films.add(film);
 				}
 			}
@@ -156,7 +156,29 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		int year = rs.getInt("release_year");
 		String rating = rs.getString("rating");
 		String description = rs.getString("description");
-		return new Film(id, title, year, rating, description);
+		int languageId = rs.getInt("language_id");
+
+		return new Film(id, title, year, rating, description, languageId);
+	}
+
+	public String getLanguageStringById(int languageId) {
+		String sql = "SELECT name FROM language WHERE id = ?";
+
+		try (Connection conn = DriverManager.getConnection(URL, user, pass);
+				PreparedStatement stmt = conn.prepareStatement(sql);) {
+
+			stmt.setInt(1, languageId);
+
+			try (ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					return rs.getString("name");
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
 }

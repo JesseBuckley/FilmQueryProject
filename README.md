@@ -18,3 +18,10 @@ Once you make a choice the program will pronpt you based on that choice.
 -GitHub
 -Sublime
 -SD Materials
+
+# Lessons Learned
+
+-I learned alot about searching for data in a database using SQL.
+
+-I learned a bit better how to manage multiple class files and keeping track of things.
+
